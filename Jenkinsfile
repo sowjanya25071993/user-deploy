@@ -33,6 +33,11 @@ pipeline{
             }
         }
         stage('plan'){
+            when{
+                expression{
+                    params.create
+                }
+            }
             steps{
                 sh"""
                  cd terraform 
