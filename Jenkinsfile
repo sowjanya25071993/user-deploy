@@ -12,8 +12,8 @@ pipeline{
     parameters{
         string(name:'version', defaultValue:'', description:'what is ur artifact version?')
         string(name:'environment', defaultValue:'', description:'what is the environment?')
-        string(name:'create', defaultValue:'false', description:'do u want to create?')
-        string(name:'destroy', defaultValue:'false', description:'do u want to destroy?')
+        booleanParam(name:'create', defaultValue:'false', description:'do u want to create?')
+        booleanParam(name:'destroy', defaultValue:'false', description:'do u want to destroy?')
     }
     stages{
         stage('print version'){
