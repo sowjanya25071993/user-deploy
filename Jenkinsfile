@@ -12,6 +12,8 @@ pipeline{
     parameters{
         string(name:'version', defaultValue:'', description:'what is ur artifact version?')
         string(name:'environment', defaultValue:'', description:'what is the environment?')
+        string(name:'create', defaultValue:'false', description:'do u want to create?')
+        string(name:'destroy', defaultValue:'false', description:'do u want to destroy?')
     }
     stages{
         stage('print version'){
@@ -39,6 +41,11 @@ pipeline{
                 }  
         }
         stage('apply'){
+            when{
+                expression{
+                    params.create
+                }
+            }
             steps{
                 sh"""
                  cd terraform
@@ -46,7 +53,22 @@ pipeline{
                  """
                 }
             }
+            stage('destroy'){
+            when{
+                expression{
+                    params.create
+                }
+            }
+            steps{
+                sh"""
+                 cd terraform
+                 terraform destroy -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
+                 """
+                }
+            }
     }
+
+    
 
 post{
         always{

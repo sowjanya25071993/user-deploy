@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket = "sowjanyaaws-state-dev"
-    key    = "catalogue"
+    key    = "user"
     region = "us-east-1"
     dynamodb_table = "sowjanyaaws-locking-dev"
     
