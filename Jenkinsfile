@@ -54,11 +54,11 @@ pipeline{
                 }
             }
             stage('destroy'){
-            when{
+             when{
                 expression{
                     params.destroy
                 }
-            }
+             }
             steps{
                 sh"""
                  cd terraform
